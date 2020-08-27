@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="banks">
+
+	<select id="banklist" resultType="com.chungang.project.model.Bank">
+		select * from BANK 
+	</select>
+
+	<delete id="truncateData">
+		TRUNCATE TABLE COUN_BANK
+	</delete>
+
+	<insert id="insertAPIData" parameterType="com.chungang.project.model.Coun_Bank">
+		INSERT INTO Coun_Bank
+		VALUES(#{BankNa}, #{CounNa}, #{tbRate}, CURRENT_TIMESTAMP)
+	</insert>
+	
+	<update id="updateData" parameterType="com.chungang.project.model.Coun_Bank">
+		UPDATE Coun_Bank
+		SET(#{BankNa}, #{CounNa}, #{tbRate}, CURRENT_TIMESTAMP);
+	</update>
+	
+	<select id="selectbybankname" resultType="com.chungang.project.model.bankResDAO">
+        SELECT C.CounNa, C.tbRate, B.fees
+		FROM Coun_Bank C
+		JOIN BANK B
+		  ON C.BANKNA = B.BANKNA
+		WHERE b.bankna =  #{bankname}
+    </select>
+</mapper>

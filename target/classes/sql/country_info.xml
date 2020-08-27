@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="banks">
+	
+	<select id="selectbycountryname" resultType="com.chungang.project.model.countryRes">
+        SELECT C.BANKNA, C.tbRate+(C.TBRATE*B.fees/100) MONEY, C.updateDate
+		FROM Coun_Bank C
+		JOIN BANK B
+		  ON C.BANKNA = B.BANKNA
+		WHERE C.CounNa= #{countryname}
+    </select>
+</mapper>
